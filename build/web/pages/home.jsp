@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inicio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- GOOGLE FONTS -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;500&display=swap"
+            rel="stylesheet"
+            />
+        <!-- BOOTSTRAP -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            />
+        <!-- Bootstrap Icons CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+            />
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/styles.css" />
+    </head>
+    <body>
+        <!-- NAV -->
+        <div id="navbar"></div>
+
+        <!-- CONTENIDO -->
+        <main class="container text-center">
+            <!-- SALDO Y METAS -->
+            <section>
+                <div class="row justify-content-between">
+                    <h5 class="my-3 text-start fw-bold">Resumen del Mes</h5>
+                    <div
+                        class="col-sm-12 col-md-6 card border-0 shadow-sm contenedores-card my-2"
+                        >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>Presupuesto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-resume"></tbody>
+                        </table>
+                    </div>
+
+                    <div
+                        class="col-sm-12 col-md-5 card border-0 shadow-sm contenedores-card my-2"
+                        >
+                        <!-- <h5 class="my-3">Metas Ahorro</h5> -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Meta Ahorro</th>
+                                    <th>Contribucion Mensual</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-metas"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ALERTAS DE PRESUPUESTO -->
+            <section class="my-5">
+                <h5 class="my-3 text-start fw-bold">Alertas Presupuesto</h5>
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 card border-0 shadow-sm" id="cardAlert">
+                        <h5 class="my-3 text-muted" id="msgAlert">Alertas Presupuesto</h5>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRANSACCIONES -->
+            <section class="my-5">
+                <h5 class="my-3 text-start fw-bold">Historial</h5>
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 card border-0 shadow-sm">
+                        <h5 class="my-3 text-muted">Transacciones</h5>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <div id="footer"></div>
+
+        <!-- Bootstrap JS + Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../js/addFooterNav.js"></script>
+        <script src="../js/home.js"></script>
+        <!-- <script src="./js/router.js"></script> -->
+    </body>
+</html>
