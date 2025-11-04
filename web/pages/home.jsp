@@ -25,8 +25,7 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <!-- NAV -->
-        <div id="navbar"></div>
+        
 
         <!-- CONTENIDO -->
         <main class="container text-center">
@@ -75,12 +74,28 @@
                 </div>
             </section>
 
-            <!-- TRANSACCIONES -->
-            <section class="my-5">
-                <h5 class="my-3 text-start fw-bold">Historial</h5>
-                <div class="row justify-content-center">
-                    <div class="col-sm-12 card border-0 shadow-sm">
-                        <h5 class="my-3 text-muted">Transacciones</h5>
+            <!-- GRAFICAS -->
+            <section class="my-1">
+                <h5 class="text-start fw-bold">Graficas Globales</h5>
+                <!-- Presupuesto vs Real -->
+                <div class="row justify-content-between">
+                    <div class="col-sm-7 card border-0 shadow-sm my-2">
+                        <h5 class="my-3 text-start fw-bold">Presupuesto vs Real</h5>
+                        <canvas id="graficaPresuVSreal"></canvas>
+                    </div>
+
+                    <div class="col-sm-10 col-md-4 card border-0 shadow-sm my-2">
+                        <h5 class="my-3 text-start fw-bold">
+                            Distribución del dinero (Presupuestado)
+                        </h5>
+                        <canvas id="graficaDistrDineroPres"></canvas>
+                    </div>
+
+                    <div class="col-sm-10 col-md-4 card border-0 shadow-sm my-2">
+                        <h5 class="my-3 text-start fw-bold">
+                            Distribución del dinero (Real)
+                        </h5>
+                        <canvas id="graficaDistrDinReal"></canvas>
                     </div>
                 </div>
             </section>
@@ -90,10 +105,16 @@
         <div id="footer"></div>
 
         <!-- Bootstrap JS + Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script src="../js/addFooterNav.js"></script>
-        <script src="../js/home.js"></script>
-        <!-- <script src="./js/router.js"></script> -->
+        <!-- Graficas con Chart.Js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+       
+        <script type="module" src="../js/home.js"></script>
+        <script type="module" src="../js/graficas.js"></script>
+
+        <script src="../js/router.js"></script>
     </body>
 </html>

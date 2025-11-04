@@ -1,10 +1,7 @@
-//Obtener usuario actual
-const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-if (!currentUser) {
-    window.location.href = "index.html";
-}
-
 let colores = ["primary", "secondary", "info", "warning", "danger"];
+
+window.limitePresupuestoGlobal = null;
+window.registrosPresupuestoGlobal = null;
 
 //#region RESUMEN
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -183,7 +180,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         const msgAlert = document.getElementById("msgAlert");
 
         // Normal Variable
-        let sumGastosByCategory = null;
+        let sumGastosByCategory = {};
 
         //#endregion
 
@@ -194,6 +191,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             // Filtramos por tipos de registros 'Gastos'
             let gastos = registros.filter((r) => r.tipo === "Gasto");
 
+            //  Obtenemos los aportes hechos
+            let provisiones = metas.reduce((total, m) => {
+                if (!m.history)
+                    return total;
+                return (
+                        total +
+                        m.history.reduce((sum, h) => {
+                            return h.action === "aporte" ? sum + Number(h.amount || 0) : sum;
+                        }, 0)
+                        );
+            }, 0);
+
             //  Verificamos que hayan gastos
             if (gastos || gastos.length > 0) {
                 sumGastosByCategory = gastos.reduce((acc, curr) => {
@@ -203,28 +212,19 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                     }
 
                     acc[curr.categoria] += curr.monto;
+
+                    if (curr.categoria === "Ahorro") {
+                        //  Agregamos las provisiones a los gastos si hay
+                        if (provisiones > 0) {
+                            if (!acc["Provisiones"]) {
+                                acc["Provisiones"] = 0;
+                            }
+                            acc["Provisiones"] += provisiones;
+                        }
+                    }
+
                     return acc;
                 }, {});
-
-                //  Obtenemos los aportes hechos
-                let provisiones = metas.reduce((total, m) => {
-                    if (!m.history)
-                        return total;
-                    return (
-                            total +
-                            m.history.reduce((sum, h) => {
-                                return h.action === "aporte" ? sum + Number(h.amount || 0) : sum;
-                            }, 0)
-                            );
-                }, 0);
-
-                //  Agregamos las provisiones a los gastos si hay
-                if (provisiones > 0) {
-                    if (!sumGastosByCategory["Provisiones"]) {
-                        sumGastosByCategory["Provisiones"] = 0;
-                    }
-                    sumGastosByCategory["Provisiones"] += provisiones;
-                }
             }
         }
         //#endregion
@@ -282,6 +282,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
         // Renderizamos la alerta
         renderAlerts();
+
+        window.limitePresupuestoGlobal = limitesPresupuesto;
+        window.registrosPresupuestoGlobal = sumGastosByCategory;
     } catch (err) {
         console.error(err);
     }

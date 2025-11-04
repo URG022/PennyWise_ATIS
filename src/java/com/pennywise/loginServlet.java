@@ -28,7 +28,6 @@ public class loginServlet extends HttpServlet  {
 
         // Aquí puedes hacer la lógica para registrar el usuario en la base de datos o en memoria
         // Por ejemplo:
-        System.out.println("Usuario registrado: " + nombre + " - " + email);
 
         // Guardar usuario en sesión (opcional)
         HttpSession sesion = request.getSession();

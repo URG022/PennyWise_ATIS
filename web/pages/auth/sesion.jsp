@@ -48,11 +48,12 @@
                     >
                     <div class="w-75 p-4">
                         <h4 class="text-white text-center mb-4">Iniciar Sesión</h4>
-                        <form id="loginForm">
+                        <form id="loginForm" action="<%= request.getContextPath()%>/sesionServlet" method="post">
                             <div class="mb-3">
                                 <label for="email" class="form-label text-white">Email</label>
                                 <input
                                     type="email"
+                                    name="email"
                                     class="form-control form-input"
                                     id="logEmail"
                                     placeholder="ejemplo@correo.com"
@@ -66,6 +67,7 @@
                                 <div class="input-group">
                                     <input
                                         type="password"
+                                        name="password"
                                         class="form-control form-input"
                                         id="logPassword"
                                         placeholder="Contraseña"
@@ -104,6 +106,29 @@
         <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
         <!-- Custom JS -->
+        <script src="../../js/sesion.js">
+        </script>
+        <script>
+            // Al cargar la página, verificar si hay error en la URL
+            window.addEventListener('DOMContentLoaded', function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get('error');
+
+                if (error === 'empty') {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "⚠️ Atención",
+                        text: "Todos los campos son obligatorios",
+                    });
+                } else if (error === 'credentials') {
+                    Swal.fire({
+                        icon: "error",
+                        title: "❌ Error",
+                        text: "Credenciales incorrectas (Email o Contraseña)",
+                    });
+                }
+            });
+        </script>
 
 
     </body>
