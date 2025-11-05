@@ -26,6 +26,8 @@
     </head>
     <body>
         
+        <!-- FOOTER -->
+        <div id="navbar"></div>
 
         <!-- CONTENIDO -->
         <main class="container text-center">
@@ -111,10 +113,9 @@
         <!-- Graficas con Chart.Js -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-       
-        <script type="module" src="../js/home.js"></script>
+        <script src="../js/logout.js"></script>
+        <script src="../js/homev1.js"></script>
         <script type="module" src="../js/graficas.js"></script>
-
-        <script src="../js/router.js"></script>
+        <script src="../js/addFooterNav.js"></script>
     </body>
 </html>

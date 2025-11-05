@@ -5,13 +5,7 @@
         <group>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/pages/home.jsp</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/graficas.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/logout.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/home.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/sesion.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/login.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/pages/auth/sesion.jsp</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/src/java/com/pennywise/loginServlet.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/src/java/com/pennywise/sesionServlet.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/homev1.js</file>
         </group>
     </open-files>
 </project-private>
