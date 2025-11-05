@@ -10,23 +10,24 @@ window.limitePresupuestoGlobal = null;
 window.registrosPresupuestoGlobal = null;
 
 // =========================================================================
-// 2. VALIDACIÓN DE USUARIO
+// 2. VALIDACIÓN DE USUARIO / SINCRONIZACIÓN LOCAL
 // =========================================================================
 function validarUsuario() {
     try {
         currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
         if (!currentUser) {
-            window.location.href = "index.jsp";
+            window.location.href = "../auth/sesion.jsp";
             return false;
         }
         return true;
     } catch (error) {
         console.error("Error al validar usuario:", error);
-        window.location.href = "index.jsp";
+        window.location.href = "../auth/sesion.jsp";
         return false;
     }
 }
+
+
 
 // =========================================================================
 // 3. OBTENER DATOS DE LOCALSTORAGE

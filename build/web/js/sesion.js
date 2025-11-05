@@ -1,19 +1,18 @@
+// =========================================================================
+// 1️⃣ FUNCIÓN PARA MOSTRAR/OCULTAR CONTRASEÑA
+// =========================================================================
 function setupPasswordToggle(inputId, toggleButtonId, iconId) {
     const input = document.getElementById(inputId);
     const toggleButton = document.getElementById(toggleButtonId);
     const eyeIcon = document.getElementById(iconId);
-    
-    // Verificamos que los elementos existan en el DOM antes de adjuntar el listener
+
     if (toggleButton && input && eyeIcon) {
         toggleButton.addEventListener("click", function (e) {
-            // Evita que el botón envíe el formulario si está dentro del <form>
             e.preventDefault();
-            
-            // Alternar el tipo (password/text)
+
             const type = input.getAttribute("type") === "password" ? "text" : "password";
             input.setAttribute("type", type);
-            
-            // Alternar el ícono (requiere Font Awesome)
+
             if (type === "text") {
                 eyeIcon.classList.remove("fa-eye");
                 eyeIcon.classList.add("fa-eye-slash");
@@ -28,16 +27,16 @@ function setupPasswordToggle(inputId, toggleButtonId, iconId) {
 // Configurar el toggle para el campo de Contraseña
 setupPasswordToggle("logPassword", "togglePassword", "eyeIconPassword");
 
+// =========================================================================
+// 2️⃣ VALIDACIÓN DE LOGIN CONTRA LOCALSTORAGE + ENVÍO AL SERVLET
+// =========================================================================
 document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    
-    // Obtener los campos de entrada
-    const logEmailIn = document.getElementById("logEmail");
-    const logPasswordIn = document.getElementById("logPassword");
-    const logEmail = logEmailIn.value.trim();
-    const logPassword = logPasswordIn.value.trim();
-    
-    // 1. Validar que no estén vacíos
+
+    const logEmail = document.getElementById("logEmail").value.trim();
+    const logPassword = document.getElementById("logPassword").value.trim();
+
+    // 1️⃣ Validar campos vacíos
     if (!logEmail || !logPassword) {
         Swal.fire({
             icon: "warning",
@@ -46,9 +45,47 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         });
         return;
     }
-    
-    // 2. Si las validaciones pasan, enviar el formulario al servlet
-    // El servlet se encargará de la autenticación real
-    const form = document.getElementById("loginForm");
-    form.submit();
+
+    // 2️⃣ Obtener lista de usuarios del localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (users.length === 0) {
+        Swal.fire({
+            icon: "error",
+            title: "❌ No hay usuarios registrados",
+            text: "Por favor, regístrate antes de iniciar sesión.",
+        });
+        return;
+    }
+
+    // 3️⃣ Buscar usuario válido
+    const foundUser = users.find(
+        (user) => user.email === logEmail && user.password === logPassword
+    );
+
+    if (!foundUser) {
+        Swal.fire({
+            icon: "error",
+            title: "❌ Credenciales incorrectas",
+            text: "El correo o la contraseña no coinciden",
+        });
+        return;
+    }
+
+    // 4️⃣ Guardar el usuario actual en localStorage
+    localStorage.setItem("currentUser", JSON.stringify(foundUser));
+
+    // 5️⃣ Mostrar mensaje de éxito y enviar el formulario al servlet
+    Swal.fire({
+        icon: "success",
+        title: "✅ Bienvenido",
+        text: `Hola, ${foundUser.name}`,
+        showConfirmButton: false,
+        timer: 1000,
+    });
+
+    setTimeout(() => {
+        // ✅ Ahora sí, enviar el formulario al servlet para que cree la sesión y redirija
+        document.getElementById("loginForm").submit();
+    }, 1000);
 });
