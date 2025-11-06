@@ -27,7 +27,7 @@
                     <a class="nav-link" href="registro.jsp">Registro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="presupuestos.jsp">Presupuesto</a>
+                    <a class="nav-link" href="presupuesto.jsp">Presupuesto</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="metas.jsp">Metas</a>
