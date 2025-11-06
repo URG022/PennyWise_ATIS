@@ -2,7 +2,7 @@
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         if (!currentUser) {
 window.location.href = "./index.html";
-        }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 // Referencias a los elementos
@@ -30,7 +30,7 @@ const formRegistro = document.getElementById("formRegistro");
         if (fechaRegistro) {
 fechaRegistro.value = hoy;
         fechaRegistro.max = hoy;
-}
+        }
 if (periodoRegistro) periodoRegistro.value = "Mensual";
         const registrosKey = `registros_${currentUser.email}`;
         const limitesKey = `limitesDePresupuesto_${currentUser.email}`;
@@ -49,9 +49,9 @@ const contenedor = document.querySelector("main") || document.body;
   `;
         contenedor.prepend(aviso);
         document.getElementById("btnIrPresupuestos").addEventListener("click", () => {
-window.location.href = "presupuestos.jsp";
-});
-}
+        window.location.href = "../pages/presupuesto.jsp";
+        });
+        }
 
 
 // Recupera registros desde localStorage
@@ -68,9 +68,9 @@ let total = registros.reduce(
 // Ignorar registros que no deben afectar el saldo (metas archivadas)
 if (r.noAfectaSaldo || r.tipo === "Meta Completada") {
 return acc;
-}
+        }
 return r.tipo === "Ingreso" ? acc + r.monto : acc - r.monto;
-},
+        },
         0
         );
         // Leer límites actuales
@@ -83,15 +83,15 @@ return r.tipo === "Ingreso" ? acc + r.monto : acc - r.monto;
 saldoTotal.textContent = formatCurrency(total);
         saldoTotal.classList.toggle("text-success", total > 0);
         saldoTotal.classList.toggle("text-danger", total < 0);
-}
+        }
 
 return total;
-};
+        };
         const formatearFecha = (fechaISO) => {
 if (!fechaISO) return "";
         const [anio, mes, dia] = fechaISO.split("-");
         return `${dia}/${mes}/${anio}`;
-};
+        };
         // ---------- HISTORIAL ----------
         const mostrarHistorial = () => {
 const tipo = filtroTipo ? filtroTipo.value : "todos";
@@ -123,7 +123,7 @@ const tipo = filtroTipo ? filtroTipo.value : "todos";
         });
         calcularSaldo();
         actualizarGraficoIngresos();
-};
+        };
         // ---------- CATEGORÍAS ----------
         const categoriasIngreso = ["Salario", "Comisiones", "Venta", "Pago", "Otro"];
         const categoriasGasto = ["Ahorro", "Gastos Fijos", "Gastos Variables", "Deudas"];
@@ -141,7 +141,7 @@ if (!filtroCategoria) return;
                 opt.textContent = c;
                 filtroCategoria.appendChild(opt);
         });
-};
+        };
         // ---------- FORMULARIO ----------
         const tipoRegistro = document.getElementById("tipoRegistro");
         const categoriaRegistro = document.getElementById("categoriaRegistro");
@@ -154,7 +154,7 @@ const tipo = tipoRegistro.value;
         if (!tipo) {
 categoriaRegistro.disabled = true;
         return;
-}
+        }
 
 categoriaRegistro.disabled = false;
         const categorias = tipo === "Ingreso" ? categoriasIngreso : tipo === "Gasto" ? categoriasGasto : [];
@@ -164,8 +164,8 @@ categoriaRegistro.disabled = false;
                 opt.textContent = c;
                 categoriaRegistro.appendChild(opt);
         });
-});
-}
+        });
+        }
 
 
 // ---------- VALIDACIÓN DE LÍMITES ----------
@@ -179,13 +179,13 @@ const raw = localStorage.getItem(limitesKey);
         })).filter(Boolean);
         } catch {
 return [];
-}
+        }
 }
 
 function obtenerLimiteParaCategoria(categoria) {
 const limites = leerLimites();
         return limites.find(l => l.categoria.toLowerCase().trim() === categoria.toLowerCase().trim());
-}
+        }
 
 function validaNoSuperaLimite(categoria, montoNuevo, idEditar = null) {
 const limiteObj = obtenerLimiteParaCategoria(categoria);
@@ -200,10 +200,10 @@ return {
 ok: false,
         detalle: { limite, gastosActuales, totalConNuevo, restante: limite - gastosActuales },
         categoria: limiteObj.categoria
-};
-}
+        };
+        }
 return { ok: true };
-}
+        }
 
 // ---------- AGREGAR REGISTRO ----------
 if (formRegistro) {
@@ -217,7 +217,7 @@ e.preventDefault();
         if (!tipo || !categoria || isNaN(monto) || monto <= 0 || !fecha) {
 Swal.fire("Error", "Completa todos los campos correctamente.", "error");
         return;
-}
+        }
 
 
 if (tipo === "Gasto") {
@@ -227,9 +227,9 @@ Swal.fire({
 icon: "error",
         title: "Saldo insuficiente",
         text: `El gasto supera el saldo actual de ${formatCurrency(saldoActual)}`,
-});
+        });
         return;
-}
+        }
 const resultado = validaNoSuperaLimite(categoria, monto);
         if (!resultado.ok) {
 const d = resultado.detalle;
@@ -247,10 +247,10 @@ const d = resultado.detalle;
         }).then((res) => {
 if (res.isConfirmed) {
 window.location.href = "presupuestos.html";
-}
+        }
 });
         return;
-}
+        }
 }
 
 
@@ -262,8 +262,8 @@ registros.push({ tipo, monto, periodo: "Mensual", categoria, descripcion, fecha 
         periodoRegistro.value = "Mensual";
         categoriaRegistro.innerHTML = `<option value="">Seleccionar Categoría</option>`;
         Swal.fire({ icon: "success", title: "Movimiento registrado correctamente", showConfirmButton: false, timer: 2000 });
-});
-}
+        });
+        }
 
 // ---------- EDITAR / ELIMINAR ----------
 tablaHistorial.addEventListener("click", (e) => {
@@ -288,7 +288,7 @@ document.getElementById("editarId").value = id;
         });
         selectCategoria.value = r.categoria || "";
         new bootstrap.Modal(document.getElementById("modalEditar")).show();
-}
+        }
 
 if (btn.classList.contains("eliminar")) {
 Swal.fire({
@@ -300,15 +300,15 @@ title: "¿Eliminar registro?",
         cancelButtonColor: "#999",
         confirmButtonText: "Sí, eliminar",
         cancelButtonText: "Cancelar",
-}).then((result) => {
+        }).then((result) => {
 if (result.isConfirmed) {
 registros.splice(id, 1);
         guardarLocal();
         mostrarHistorial();
         Swal.fire("Eliminado", "El registro ha sido eliminado.", "success");
-}
+        }
 });
-}
+        }
 });
         // ---------- GUARDAR CAMBIOS EDITAR ----------
         if (formEditar) {
@@ -322,7 +322,7 @@ e.preventDefault();
         if (isNaN(nuevoMonto) || nuevoMonto <= 0 || !nuevaCategoria || !nuevaFecha) {
 Swal.fire("Error", "Completa todos los campos correctamente.", "error");
         return;
-}
+        }
 
 
 
@@ -344,13 +344,13 @@ const d = resultado.detalle;
         }).then((res) => {
 if (res.isConfirmed) {
 window.location.href = "presupuestos.html";
-} else {
+        } else {
 const modalEditar = bootstrap.Modal.getInstance(document.getElementById("modalEditar"));
         if (modalEditar) modalEditar.hide();
-}
+        }
 });
         return;
-}
+        }
 }
 
 registros[id].monto = nuevoMonto;
@@ -361,8 +361,8 @@ registros[id].monto = nuevoMonto;
         mostrarHistorial();
         bootstrap.Modal.getInstance(document.getElementById("modalEditar")).hide();
         Swal.fire({ icon: "success", title: "¡Movimiento actualizado correctamente!", timer: 1200, showConfirmButton: false });
-});
-}
+        });
+        }
 
 // ---------- GRÁFICO ----------
 function actualizarGraficoIngresos() {
@@ -404,7 +404,7 @@ const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "O
                         }
                 }
         });
-}
+        }
 
 // ---------- FILTROS ----------
 if (filtroTipo) filtroTipo.addEventListener("change", () => { actualizarCategorias(); mostrarHistorial(); });
@@ -419,8 +419,8 @@ formRegistro.reset();
         fechaRegistro.value = hoy;
         periodoRegistro.value = "Mensual";
         categoriaRegistro.innerHTML = `<option value="">Seleccionar Categoría</option>`;
-});
-}
+        });
+        }
 
 const btnLimpiarFiltros = document.getElementById("btnLimpiarFiltros");
         if (btnLimpiarFiltros) {
@@ -430,8 +430,8 @@ if (filtroTipo) filtroTipo.value = "todos";
         if (filtroCategoria) filtroCategoria.value = "todas";
         actualizarCategorias();
         mostrarHistorial();
-});
-}
+        });
+        }
 
 
 

@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/pages/home.jsp</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/sesion.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/pages/auth/sesion.jsp</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/web/js/homev1.js</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/PennyWise_ATIS/src/java/com/pennywise/sesionServlet.java</file>
+            <file>file:/C:/Users/DFABD/Desktop/PennyWise_ATIS/web/js/logout.js</file>
+            <file>file:/C:/Users/DFABD/Desktop/PennyWise_ATIS/web/js/registro.js</file>
+            <file>file:/C:/Users/DFABD/Desktop/PennyWise_ATIS/web/js/addFooterNav.js</file>
+            <file>file:/C:/Users/DFABD/Desktop/PennyWise_ATIS/src/java/com/pennywise/registroServlet.java</file>
         </group>
     </open-files>
 </project-private>

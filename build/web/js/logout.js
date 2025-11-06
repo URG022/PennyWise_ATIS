@@ -21,7 +21,7 @@ function handleLogout() {
             });
 
             setTimeout(() => {
-                window.location.href = "../../index.html";
+                window.location.href = "../index.jsp";
             }, 1500);
         }
     });
